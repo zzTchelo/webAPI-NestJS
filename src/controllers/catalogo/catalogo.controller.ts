@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { filme } from 'src/controllers/catalogo/filme';
 import { CatalogoService } from './catalogo.service';
 
@@ -17,6 +17,21 @@ export class CatalogoController {
     @Get('/:id')
     findByID(@Param('id') id : number){
         return this.catalogo.findById(id);
+    }
+
+    @Get('')
+    findAll(){
+        return this.catalogo.findAll();
+    }
+
+    @Put('')
+    update(@Body() filme : filme){
+        this.catalogo.update(filme)
+    }
+
+    @Delete('/:id')
+    delete(@Param('id') id : number){
+        this.catalogo.delete(id);
     }
 
 }
