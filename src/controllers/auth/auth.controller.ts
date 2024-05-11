@@ -12,14 +12,20 @@ export class AuthController {
     ){}
 
     @ApiBody({ 
-        description: 'Credenciais necessárias para autenticação do usuário.',
+        description: 'Credenciais de autenticação do usuário.',
         schema: {
-            example: {
-                username: 'example_user',
-                password: 'example_password'
+            type: 'object',
+            properties: {
+                username: {
+                    type: 'string',
+                    example: 'example_user'
+                },
+                password: {
+                    type: 'string',
+                    example: 'example_password'
+                }
             }
-        },
-        type: auth 
+        }
     })
     @ApiResponse({ 
         status: HttpStatus.OK, 
