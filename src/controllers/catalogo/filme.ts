@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsDateString, IsEnum, IsOptional, IsString, IsUUID, MaxLength, MinLength } from "class-validator";
 
 export enum GeneroFilme {
@@ -26,22 +27,37 @@ export enum GeneroFilme {
 export class filme{
     @IsUUID()
     @IsOptional()
+    @ApiProperty({
+        description : 'O Id do filme (gerado automáticamente).'
+    })
     id : string;
 
     @IsString()
     @MinLength(3)
     @MaxLength(256)
+    @ApiProperty({
+        description: 'Título do Filme.',
+        example: 'Vingadores: Ultimato'
+    })
     title : string;
     
     @IsEnum(GeneroFilme)
+    @ApiProperty({
+        description: 'Gênero do filme.',
+        example: 'Ação',
+        enum: GeneroFilme 
+    })
     gender : string;
 
     @IsDateString()
+    @ApiProperty({
+        description: 'Data de lançamento do filme.',
+        example: '2019-04-25'
+    })
     dateRelease : string;
 }
 
 export class findAllParameters{
-
     title : string;
     gender : string;
 }

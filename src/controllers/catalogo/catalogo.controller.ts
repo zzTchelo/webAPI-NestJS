@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } fro
 import { FilmeRouteParameters, filme, findAllParameters } from 'src/controllers/catalogo/filme';
 import { CatalogoService } from './catalogo.service';
 import { AuthGuard } from '../auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Filmes')
 @UseGuards(AuthGuard)
 @Controller('catalogo')
 export class CatalogoController {
