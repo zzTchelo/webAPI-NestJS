@@ -45,3 +45,8 @@ export class findAllParameters{
     title : string;
     gender : string;
 }
+
+export class FilmeRouteParameters{
+    @IsUUID()
+    id : string
+}

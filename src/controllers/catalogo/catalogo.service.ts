@@ -54,11 +54,15 @@ export class CatalogoService {
         return filmesFound.map(entityFilme => this.mapEntity(entityFilme));
     }
 
-    update(filmeAtualizado : filme){
+    async update(id : string, filmeAtualizado : filme){
+        const foundFilme = await this.filmeRepository.findOne({
+            where : { id }
+        })
 
+        if (!foundFilme)
+            throw new HttpException(`Formato de filme inválido ou filme não encontrado.`, HttpStatus.BAD_REQUEST);
 
-
-        throw new HttpException(`Formato de filme inválido ou filme não encontrado.`, HttpStatus.BAD_REQUEST);
+        await this.filmeRepository.update(id, this.mapDatatoEntity(filmeAtualizado));
         
     }
 
@@ -67,12 +71,20 @@ export class CatalogoService {
         throw new HttpException(`Filme não encontrado.`, HttpStatus.NOT_FOUND);
     }
 
-    private mapEntity(Filme : entityFilme) : filme {
+    private mapEntity(filme : entityFilme) : filme {
         return {
-            id : Filme.id,
-            title : Filme.title,
-            gender : Filme.gender,
-            dateRelease : Filme.dateRelease
+            id : filme.id,
+            title : filme.title,
+            gender : filme.gender,
+            dateRelease : filme.dateRelease
+        }
+    }
+
+    private mapDatatoEntity(filme : filme) : Partial<entityFilme>{
+        return {
+            title : filme.title,
+            gender : filme.gender,
+            dateRelease : filme.dateRelease
         }
     }
 }

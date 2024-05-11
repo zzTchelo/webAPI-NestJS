@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
-import { filme, findAllParameters } from 'src/controllers/catalogo/filme';
+import { FilmeRouteParameters, filme, findAllParameters } from 'src/controllers/catalogo/filme';
 import { CatalogoService } from './catalogo.service';
 import { AuthGuard } from '../auth/auth.guard';
 
@@ -26,9 +26,9 @@ export class CatalogoController {
         return await this.catalogo.findAll(params);
     }
 
-    @Put('')
-    async update(@Body() filme : filme){
-        await this.catalogo.update(filme)
+    @Put('/:id')
+    async update(@Param() param : FilmeRouteParameters, @Body() filme : filme){
+        await this.catalogo.update(param.id, filme)
     }
 
     @Delete('/:id')
