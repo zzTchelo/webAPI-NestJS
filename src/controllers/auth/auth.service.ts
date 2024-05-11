@@ -18,9 +18,9 @@ export class AuthService {
         this.jwtExpirationSeconds = +this.configService.get<number>('JWT_EXPIRATION');
     }
 
-    login(username : string, password : string) : auth{
+    async login(username : string, password : string) : Promise<auth>{
         
-        const foundUser = this.userService.findByUsername(username);
+        const foundUser = await this.userService.findByUsername(username);
 
         if (!foundUser || !compareSync(password, foundUser.password))    
             throw new UnauthorizedException();
