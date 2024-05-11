@@ -9,7 +9,7 @@ export class UserTable1715404725912 implements MigrationInterface {
             id UUID NOT NULL DEFAULT uuid_generate_v4(),
             username VARCHAR(256) NOT NULL,
             password_hash VARCHAR(256) NOT NULL,
-            CONSTRAINT user_pk_id PRIMARY KEY(id)
+            CONSTRAINT user_pk_id PRIMARY KEY(id),
             CONSTRAINT user_un_username UNIQUE(username)
         );
     `);

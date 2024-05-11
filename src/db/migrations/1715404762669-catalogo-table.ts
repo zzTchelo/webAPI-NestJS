@@ -8,7 +8,7 @@ export class CatalogoTable1715404762669 implements MigrationInterface {
                 id UUID NOT NULL DEFAULT uuid_generate_v4(),
                 title VARCHAR(256) NOT NULL,
                 gender VARCHAR(50) NOT NULL DEFAULT 'GeneroFilme',
-                date_release timestampz NOT NULL
+                date_release timestampz NOT NULL,
                 CONSTRAINT filme_pk PRIMARY KEY(id)
             );
         `);
