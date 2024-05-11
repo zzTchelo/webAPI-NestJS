@@ -22,7 +22,7 @@ export class UsersService {
 
         const dbUser = new entityUser();
         dbUser.username = newUser.username;
-        dbUser.passwordHash = bcrypt(newUser.password, 10);
+        dbUser.passwordHash = bcrypt(newUser.password, 2);
 
         const {id, username} = await this.usersRepository.save(dbUser);
 
@@ -36,7 +36,7 @@ export class UsersService {
         })
 
         if (!userFound)
-            null;
+            return null;
 
         return {
             id : userFound.id,
