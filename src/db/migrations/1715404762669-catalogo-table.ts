@@ -3,7 +3,6 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 export class CatalogoTable1715404762669 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
         await queryRunner.query(`
             CREATE TABLE FILMES(
                 id UUID NOT NULL DEFAULT uuid_generate_v4(),
