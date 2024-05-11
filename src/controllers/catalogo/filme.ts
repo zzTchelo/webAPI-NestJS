@@ -39,3 +39,9 @@ export class filme{
     @IsDateString()
     dateRelease : string;
 }
+
+export class findAllParameters{
+
+    title : string;
+    gender : string;
+}
