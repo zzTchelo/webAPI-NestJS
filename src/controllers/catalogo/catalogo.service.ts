@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { filme } from './filme';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class CatalogoService {
@@ -7,12 +8,12 @@ export class CatalogoService {
     private filmes : filme [] = []
 
     create(filme : filme){
+        filme.id = uuid();
         this.filmes.push(filme);
-        throw new HttpException(`Filme adicionado com sucesso!`, HttpStatus.CREATED)
     }
 
-    findById(id : number) : filme{
-        const foundFilme = this.filmes.filter( filme => filme.id == id);
+    findById(id : string) : filme{
+        const foundFilme = this.filmes.filter( filme => filme.id === id);
 
         if (foundFilme.length)
             return foundFilme[0]
@@ -38,7 +39,7 @@ export class CatalogoService {
         
     }
 
-    delete(id : number){
+    delete(id : string){
         let filmeExists = this.filmes.findIndex( filme => filme.id == id);
         
         if (filmeExists >= 0){

@@ -17,7 +17,7 @@ export class CatalogoController {
     }
 
     @Get('/:id')
-    findByID(@Param('id') id : number){
+    findByID(@Param('id') id : string){
         return this.catalogo.findById(id);
     }
 
@@ -32,7 +32,7 @@ export class CatalogoController {
     }
 
     @Delete('/:id')
-    delete(@Param('id') id : number){
+    delete(@Param('id') id : string){
         this.catalogo.delete(id);
     }
 

@@ -12,7 +12,6 @@ export class UsersService {
         newUser.id = uuid();
         newUser.password = bcrypt(newUser.password, 10);
         this.users.push(newUser);
-        console.log(this.users)
     }
 
     findByUsername (username : string) : user | null {
