@@ -5,13 +5,13 @@ export class UserTable1715404725912 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
         await queryRunner.query(`
-        CREATE TABLE FILMES (
+        CREATE TABLE "user"(
             id UUID NOT NULL DEFAULT uuid_generate_v4(),
-            title VARCHAR(256) NOT NULL,
-            gender VARCHAR(50) NOT NULL DEFAULT 'GeneroFilme',
-            date_release TIMESTAMP WITH TIME ZONE NOT NULL,
-            CONSTRAINT filme_pk PRIMARY KEY (id)
-        );        
+            username VARCHAR(256) NOT NULL,
+            password_hash VARCHAR(256) NOT NULL,
+            CONSTRAINT user_pk_id PRIMARY KEY(id),
+            CONSTRAINT user_un_username UNIQUE(username)
+        );
     `);
     }
 
