@@ -1,24 +1,40 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { filme } from './filme';
 import { v4 as uuid } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { entityFilme } from 'src/db/entities/filme.entity';
 
 @Injectable()
 export class CatalogoService {
 
-    private filmes : filme [] = []
+    constructor(
+        @InjectRepository(entityFilme)
+        private readonly filmeRepository : Repository<entityFilme>
+    ) {}
 
-    create(filme : filme){
-        filme.id = uuid();
-        this.filmes.push(filme);
+    async create(filme : filme){
+        const filmeToSave : entityFilme = {
+            title : filme.title,
+            gender : filme.gender,
+            dateRelease : filme.dateRelease
+        }
+
+        const createFilme = await this.filmeRepository.save(filmeToSave);
+
+        return this.mapEntity(createFilme);
+
     }
 
-    findById(id : string) : filme{
-        const foundFilme = this.filmes.filter( filme => filme.id === id);
+    async findById(id : string) : Promise<filme> {
+        const foundFilme = await this.filmeRepository.findOne({
+            where : { id }
+        })
 
-        if (foundFilme.length)
-            return foundFilme[0]
-        
-        throw new HttpException(`ID:${id} not found!`, HttpStatus.NOT_FOUND);
+        if (!foundFilme)
+            throw new HttpException(`ID:${id} not found!`, HttpStatus.NOT_FOUND);
+            
+        return this.mapEntity(foundFilme)
 
     }
 
@@ -50,4 +66,12 @@ export class CatalogoService {
         throw new HttpException(`Filme não encontrado.`, HttpStatus.NOT_FOUND);
     }
 
+    private mapEntity(Filme : entityFilme) : filme {
+        return {
+            id : Filme.id,
+            title : Filme.title,
+            gender : Filme.gender,
+            dateRelease : Filme.dateRelease
+        }
+    }
 }

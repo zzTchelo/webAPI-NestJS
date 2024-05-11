@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity({name : 'filmes'})
 export class entityFilme {
     @PrimaryGeneratedColumn('uuid')
-    id : string;
+    id?: string;
 
     @Column({type : 'varchar'})
     title : string;

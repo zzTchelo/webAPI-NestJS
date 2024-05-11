@@ -12,28 +12,28 @@ export class CatalogoController {
     ){}
 
     @Post()
-    create(@Body() filme : filme){
-        this.catalogo.create(filme);
+    async create(@Body() filme : filme) : Promise<filme>{
+        return await this.catalogo.create(filme);
     }
 
     @Get('/:id')
-    findByID(@Param('id') id : string){
-        return this.catalogo.findById(id);
+    async findByID(@Param('id') id : string ) : Promise<filme>{
+        return await this.catalogo.findById(id);
     }
 
     @Get('')
-    findAll(){
-        return this.catalogo.findAll();
+    async findAll(){
+        return await this.catalogo.findAll();
     }
 
     @Put('')
-    update(@Body() filme : filme){
-        this.catalogo.update(filme)
+    async update(@Body() filme : filme){
+        await this.catalogo.update(filme)
     }
 
     @Delete('/:id')
-    delete(@Param('id') id : string){
-        this.catalogo.delete(id);
+    async delete(@Param('id') id : string){
+        await this.catalogo.delete(id);
     }
 
 }
