@@ -66,9 +66,13 @@ export class CatalogoService {
         
     }
 
-    delete(id : string){
+    async delete(id : string){
 
-        throw new HttpException(`Filme não encontrado.`, HttpStatus.NOT_FOUND);
+        const result = await this.filmeRepository.delete(id);
+
+        if (!result.affected)
+            throw new HttpException(`Filme não encontrado.`, HttpStatus.NOT_FOUND);
+
     }
 
     private mapEntity(filme : entityFilme) : filme {
