@@ -22,14 +22,16 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição
 
+CRUD de filmes feito em NestJS, banco de dados em PostgreSQL, ambos, Banco de dados e aplicação estão hospedados na [Render](https://render.com).
+Toda a documentação da API é feita via Swagger, documentada na URL raiz da aplicação.
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalação
 
 ```bash
-$ npm install
+$ npm install; npm run build; npm run migration:run
 ```
 
 ## Running the app
