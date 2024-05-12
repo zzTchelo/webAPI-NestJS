@@ -27,9 +27,6 @@ export enum GeneroFilme {
 export class filme{
     @IsUUID()
     @IsOptional()
-    @ApiProperty({
-        description : 'O Id do filme (gerado automáticamente).'
-    })
     id : string;
 
     @IsString()

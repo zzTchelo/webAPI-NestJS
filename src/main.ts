@@ -13,10 +13,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('Users')
     .addTag('Filmes')
+    .setDescription('Para realizar requisições GET | POST | PUT | DELETE no catálogo, é preciso fornecer um token de autenticação Bearer, fornecido pela aplicação, após criar um usuário (caso ainda não o tenha), e realizando o login com o mesmo.')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, document);
+  SwaggerModule.setup('', app, document);
 
   await app.listen(port);
 }
